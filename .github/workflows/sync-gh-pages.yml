@@ -1,0 +1,27 @@
+name: Sync gh-pages from upstream
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+  workflow_dispatch:      # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork repo
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          persist-credentials: false
+
+      - name: Pull gh-pages from upstream and overwrite
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+
+          git remote add upstream https://github.com/GriffithsLab/brainmodes2025-website.git
+          git fetch upstream gh-pages
+
+          git reset --hard upstream/gh-pages
+          git push origin gh-pages --force
