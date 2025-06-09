@@ -22,7 +22,7 @@ jobs:
 
       - name: Add upstream and fetch
         run: |
-          git remote add upstream https://github.com/brainmodes2025/brainmodes2025-website.git
+          git remote add upstream https://github.com/GriffithsLab/brainmodes2025-website.git
           git fetch upstream gh-pages
           git reset --hard upstream/gh-pages
 
